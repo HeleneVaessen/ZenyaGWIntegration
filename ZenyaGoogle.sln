@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZenyaGoogle", "ZenyaGoogle\ZenyaGoogle.csproj", "{6EDAEA8A-D39E-4014-9904-4972252C82A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZenyaClient", "ZenyaClient\ZenyaClient.csproj", "{67CE8F98-BA98-4C31-8E5A-2AA9C63DBAD7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6EDAEA8A-D39E-4014-9904-4972252C82A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EDAEA8A-D39E-4014-9904-4972252C82A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EDAEA8A-D39E-4014-9904-4972252C82A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EDAEA8A-D39E-4014-9904-4972252C82A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67CE8F98-BA98-4C31-8E5A-2AA9C63DBAD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67CE8F98-BA98-4C31-8E5A-2AA9C63DBAD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67CE8F98-BA98-4C31-8E5A-2AA9C63DBAD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67CE8F98-BA98-4C31-8E5A-2AA9C63DBAD7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AFBD4619-E0E8-4B9E-8180-B46550B90A85}
+	EndGlobalSection
+EndGlobal
