@@ -2,8 +2,19 @@ using ZenyaClient;
 using ZenyaGoogle.Attributes;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var AllowAnyOrigin = "AllowAnyOrigin";
 // Add services to the container.
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: AllowAnyOrigin,
+                      builder =>
+                      {
+                          builder.AllowAnyOrigin()
+                                 .AllowAnyHeader()
+                                 .AllowAnyMethod();
+                      });
+});
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -33,6 +44,7 @@ builder.Services.AddScoped<ITokenProvider, TokenProvider>();
 ConfigureClients(builder);
 
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -53,9 +65,8 @@ app.Use(async (ctx, next) =>
     provider.GoogleToken = ctx.Request.Headers["X-GoogleAuth"];
     await next.Invoke();
 });
-
+app.UseCors(AllowAnyOrigin);
 app.UseAuthorization();
-
 
 app.MapControllers();
 
