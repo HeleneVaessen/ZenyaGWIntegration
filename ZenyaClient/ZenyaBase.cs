@@ -15,8 +15,9 @@ public class ZenyaBase
 
     protected async Task<HttpRequestMessage> CreateHttpRequestMessageAsync(CancellationToken cancellationToken)
     {
-        
-        return new HttpRequestMessage();
+        var request = new HttpRequestMessage();
+        request.Headers.Add("Authorization",configuration.Tokens.ZenyaToken);
+        return request;
     }
     /// <summary>
     /// Custom json Settings
