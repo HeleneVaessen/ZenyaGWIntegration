@@ -10,9 +10,25 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(opt =>
 {
-    opt.OperationFilter<GoogleHeaderAttribute>();
+      opt.OperationFilter<GoogleHeaderAttribute>();
     opt.OperationFilter<ZenyaHeaderAttribute>();
+
 });
+var options = new ClientOptions
+{
+    BaseUrl = builder.Configuration["ZenyaApi:BaseUrl"]
+};
+builder.Services.AddScoped<IUsersClient, UsersClient>(x =>
+{
+    options.Tokens = x.GetService<ITokenProvider>();
+    return new UsersClient(options);
+});
+builder.Services.AddAuthentication().AddGoogle(googleOptions =>
+{
+    googleOptions.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+    googleOptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+});
+
 builder.Services.AddScoped<ITokenProvider, TokenProvider>();
 ConfigureClients(builder);
 
