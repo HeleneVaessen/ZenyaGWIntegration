@@ -10,11 +10,13 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        dotnet-version: [ '6.0.x']
+        
     steps:
     - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
+
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
@@ -26,6 +28,7 @@ jobs:
     
     - name: Build
       run: dotnet build -c Release --no-restore
-    
+      
     - name: Test
-      run: dotnet test -c Release --no-build --verbosity normal --filter zenyaClient_test
+      run: dotnet test --no-restore --verbosity normal
+ 
