@@ -13,6 +13,7 @@ public class ZenyaBase
         BaseUrl = configuration.BaseUrl;
     }
 
+
     protected async Task<HttpRequestMessage> CreateHttpRequestMessageAsync(CancellationToken cancellationToken)
     {
         var request = new HttpRequestMessage();
