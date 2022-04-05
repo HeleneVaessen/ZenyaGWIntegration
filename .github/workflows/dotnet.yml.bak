@@ -3,8 +3,6 @@ name: Build and test
 on:
   pull_request:
     branches: [ CICD ]
-  push:
-    branches: [ CICD ]
 
 jobs:
   build:
