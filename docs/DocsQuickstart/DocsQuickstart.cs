@@ -39,7 +39,7 @@ namespace DocsQuickstart
             UserCredential credential;
 
             using (var stream =
-                new FileStream("client_secret_408797503550-eeprtabf7n4od01k1lbai04o7ct7av64.apps.googleusercontent.com.json", FileMode.Open, FileAccess.Read))
+                new FileStream("./client_secret_408797503550-eeprtabf7n4od01k1lbai04o7ct7av64.apps.googleusercontent.com.json", FileMode.Open, FileAccess.Read))
             {
                 string credPath = "token.json";
 
