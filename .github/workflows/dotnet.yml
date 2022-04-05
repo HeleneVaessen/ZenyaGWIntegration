@@ -2,9 +2,9 @@ name: Build and test
 
 on:
   pull_request:
-    branches: [ CICD ]
+    branches: [ main ]
   push:
-    branches: [ CICD ]
+    branches: [ main ]
 
 jobs:
   build:
