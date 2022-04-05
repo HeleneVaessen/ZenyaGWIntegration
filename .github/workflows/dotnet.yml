@@ -1,8 +1,6 @@
-name: .NET
+name: Build and test
 
 on:
-  push:
-    branches: [ CICD ]
   pull_request:
     branches: [ CICD ]
 
@@ -12,14 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
+    - uses: actions/checkout@v2
       with:
-        dotnet-version: 5.0.x
+        fetch-depth: 0
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    
     - name: Restore dependencies
       run: dotnet restore
+    
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build -c Release --no-restore
+    
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test -c Release --no-build --verbosity normal --filter "Category!=LongRunning"
