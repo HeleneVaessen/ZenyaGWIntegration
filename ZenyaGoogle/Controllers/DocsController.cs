@@ -67,7 +67,10 @@ namespace ZenyaGoogle.Controllers
             var revisions = new RevisionsResource.ListRequest(_driveService, googleDocId).Execute();
             var revisionId = revisions.Revisions.OrderByDescending(x=>x.ModifiedTime).FirstOrDefault()?.Id;
 
-            var request = new RevisionsResource.GetRequest(_driveService, googleDocId, revisionId);
+            var request = new RevisionsResource.GetRequest(_driveService, googleDocId, revisionId)
+            {
+                Fields = "*"
+            };
             var revision = request.Execute();
             
             var updatedRevision = new RevisionsResource.UpdateRequest(_driveService, new Revision()
@@ -75,7 +78,11 @@ namespace ZenyaGoogle.Controllers
                 Id = revisionId,
                 Published = true,
                 PublishAuto = true
-            }, googleDocId, revisionId).Execute();
+            }, googleDocId, revisionId)
+            {
+                Fields = "*"
+            }.Execute();
+            updatedRevision = request.Execute();
             return Ok(updatedRevision);
         }
     }
