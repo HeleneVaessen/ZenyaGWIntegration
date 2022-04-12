@@ -55,6 +55,10 @@ builder.Services.AddScoped<IUsersClient, UsersClient>(x =>
 {
     options.Tokens = x.GetService<ITokenProvider>();
     return new UsersClient(options);
+});builder.Services.AddScoped<IDocumentsClient, DocumentsClient>(x =>
+{
+    options.Tokens = x.GetService<ITokenProvider>();
+    return new DocumentsClient(options);
 });
 //builder.Services.AddAuthentication(o =>
 //{
