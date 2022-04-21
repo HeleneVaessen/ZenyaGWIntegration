@@ -31,7 +31,7 @@ namespace DocsQuickstart
     {
         // If modifying these scopes, delete your previously saved credentials
         // at ~/.credentials/docs.googleapis.com-dotnet-quickstart.json
-        static string[] Scopes = { DocsService.Scope.Documents, DocsService.Scope.Drive };
+        static string[] Scopes = { DocsService.Scope.Documents, DocsService.Scope.Drive, DriveService.Scope.DriveAppdata };
         static string ApplicationName = "Google Docs API .NET Quickstart";
 
         static void Main(string[] args)
@@ -53,26 +53,43 @@ namespace DocsQuickstart
             }
 
             // Create Google Docs API service.
-            var service = new DocsService(new BaseClientService.Initializer()
+            /*var service = new DocsService(new BaseClientService.Initializer()
+            {
+                HttpClientInitializer = credential,
+                ApplicationName = ApplicationName,
+                ApiKey = "AIzaSyA9jxBxcEfEdEUSjZYVutUgOvVBoQFfm8M"
+            }) ;*/
+
+            // GET Request.
+            // String documentId = "";
+            // DocumentsResource.GetRequest request = service.Documents.Get(documentId);
+
+            // CREATE Request.
+            // Document doc = new Document();
+            // doc.Title = "My Document";
+            // DocumentsResource.CreateRequest request = service.Documents.Create(doc);
+
+            // Execute request.
+            // Prints the title of the requested doc:
+            // https://docs.google.com/document/d/195j9eDD3ccgjQRttHhJPymLJUCOUjs-jmwTrekvdjFE/edit
+            //Document doc1 = request.Execute();
+            //Console.WriteLine($"Document {doc1.Title} successfully found");
+
+            Google.Apis.Drive.v3.Data.File fileMetadata = new Google.Apis.Drive.v3.Data.File();
+            fileMetadata.Name = "newdoc.docx";
+            fileMetadata.Parents = new string[] { "appDataFolder" };
+
+            var service = new DriveService(new BaseClientService.Initializer()
             {
                 HttpClientInitializer = credential,
                 ApplicationName = ApplicationName,
                 ApiKey = "AIzaSyA9jxBxcEfEdEUSjZYVutUgOvVBoQFfm8M"
             }) ;
 
-            // Define request parameters.
-            //String documentId = "";
-
-            //DocumentsResource.GetRequest request = service.Documents.Get(documentId);
-
-            Document doc = new Document();
-            doc.Title = "My Document";
-            DocumentsResource.CreateRequest request = service.Documents.Create(doc);
-
-            // Prints the title of the requested doc:
-            // https://docs.google.com/document/d/195j9eDD3ccgjQRttHhJPymLJUCOUjs-jmwTrekvdjFE/edit
-            Document doc1 = request.Execute();
-            Console.WriteLine("Document {0} successfully found", doc1.Title);
+            var request = service.Files.Create(fileMetadata);
+            request.Fields = "id";
+            request.Execute();
+            Console.WriteLine("File ID: " + fileMetadata.Id);
         }
     }
 }
