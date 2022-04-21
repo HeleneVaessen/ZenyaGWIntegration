@@ -31,7 +31,7 @@ namespace DocsQuickstart
     {
         // If modifying these scopes, delete your previously saved credentials
         // at ~/.credentials/docs.googleapis.com-dotnet-quickstart.json
-        static string[] Scopes = { DocsService.Scope.Documents, DocsService.Scope.Drive, DriveService.Scope.DriveAppdata };
+        static string[] Scopes = { DocsService.Scope.Documents, DocsService.Scope.Drive, DriveService.Scope.DriveAppdata, DriveService.Scope.DriveMetadata };
         static string ApplicationName = "Google Docs API .NET Quickstart";
 
         static void Main(string[] args)
@@ -75,6 +75,8 @@ namespace DocsQuickstart
             //Document doc1 = request.Execute();
             //Console.WriteLine($"Document {doc1.Title} successfully found");
 
+
+            // CREATE File AppData
             Google.Apis.Drive.v3.Data.File fileMetadata = new Google.Apis.Drive.v3.Data.File();
             fileMetadata.Name = "newdoc.docx";
             fileMetadata.Parents = new string[] { "appDataFolder" };
@@ -90,6 +92,20 @@ namespace DocsQuickstart
             request.Fields = "id";
             request.Execute();
             Console.WriteLine("File ID: " + fileMetadata.Id);
+
+
+            // SEARCH Appdata
+            var requestSearch = service.Files.List();
+            requestSearch.Spaces = "appDataFolder";
+            requestSearch.Fields = "nextPageToken, files(id, name)";
+            requestSearch.PageSize = 10;
+            var responseSearch = requestSearch.Execute();
+
+            foreach(Google.Apis.Drive.v3.Data.File file in responseSearch.Files)
+            {
+                Console.WriteLine($"Found file {file.Name}");
+            }
+
         }
     }
 }
