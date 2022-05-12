@@ -27,7 +27,7 @@ builder.Services.AddCors(options =>
                                  .AllowAnyMethod();
                       });
 });
-
+builder.Services.AddMemoryCache();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -56,6 +56,16 @@ builder.Services.AddScoped<IUsersClient, UsersClient>(x =>
     options.Tokens = x.GetService<ITokenProvider>();
     return new UsersClient(options);
 });
+builder.Services.AddScoped<IDocumentsClient, DocumentsClient>(x =>
+ {
+     options.Tokens = x.GetService<ITokenProvider>();
+     return new DocumentsClient(options);
+ });
+builder.Services.AddScoped<IDocumentQuickCodeClient, DocumentQuickCodeClient>(x =>
+ {
+     options.Tokens = x.GetService<ITokenProvider>();
+     return new DocumentQuickCodeClient(options);
+ });
 //builder.Services.AddAuthentication(o =>
 //{
 //    //This forces challenge results to be handled by Google OpenID Handler, so there's no
